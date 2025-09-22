@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate Labs - Cyber Security Internship - Task 1 Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #005a9c;
+        }
+        pre {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .risk {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .normal {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Elevate Labs - Cyber Security Internship</h1>
+        <h2>Task 1: Scan Your Local Network for Open Ports - Report</h2>
+    </header>
+
+    <div class="section">
+        <h3>Objective</h3>
+        <p>
+            The objective of this task was to learn to discover open ports on devices in my local network using Nmap. By performing this network reconnaissance, I aimed to understand the network's exposure and identify potential security risks associated with open ports.
+        </p>
+    </div>
+
+    <div class="section">
+        <h3>Methodology</h3>
+        <ol>
+            <li>Installed Nmap from its official website.</li>
+            <li>Identified my local IP range using the command <code>ipconfig</code>, which revealed my IPv4 address to be 192.168.1.15. The default gateway was 192.168.1.1. This established the network range as 192.168.1.0/24.</li>
+            <li>Executed a TCP SYN scan on the network using the command: <code>nmap -sS 192.168.1.0/24</code>.</li>
+            <li>Saved the results and analyzed the output to identify IP addresses, open ports, and potential vulnerabilities.</li>
+            <li>Conducted research to understand the services running on the identified ports and the associated security risks.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h3>Scan Results</h3>
+        <p>The Nmap scan produced the following output:</p>
+        <pre>
+Nmap scan report for 192.168.1.1
+Host is up (0.050s latency).
+Not shown: 995 closed TCP ports (reset)
+PORT      STATE SERVICE
+23/tcp    open  telnet
+53/tcp    open  domain
+80/tcp    open  http
+5555/tcp  open  freeciv
+49152/tcp open  unknown
+MAC Address: 1C:18:4A:75:BD:50 (Shenzhen RicherLink Technologies)
+
+Nmap scan report for 192.168.1.3
+Host is up (0.19s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT      STATE SERVICE
+49152/tcp open  unknown
+62078/tcp open  iphone-sync
+MAC Address: B6:C3:B5:18:4D:35 (Unknown)
+
+Nmap scan report for 192.168.1.5
+Host is up (0.28s latency).
+All 1000 scanned ports on 192.168.1.5 are in ignored states.
+Not shown: 853 closed tcp ports (reset), 147 filtered tcp ports (no-response)
+MAC Address: 7E:EB:73:04:A5:63 (Unknown)
+
+Nmap scan report for 192.168.1.7
+Host is up (0.0065s latency).
+All 1000 scanned ports on 192.168.1.7 are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+MAC Address: 4E:D4:98:F4:99:17 (Unknown)
+
+Nmap scan report for 192.168.1.13
+Host is up (0.093s latency).
+All 1000 scanned ports on 192.168.1.13 are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+MAC Address: 52:9C:77:21:F4:43 (Unknown)
+        </pre>
+    </div>
+
+    <div class="section">
+        <h3>Analysis of Findings</h3>
+        <p>The scan revealed several active devices on the network. A detailed analysis of the open ports and their associated services is provided below:</p>
+        
+        <h4>IP Address: 192.168.1.1</h4>
+        <p>This IP address belongs to the network's router, which is also the default gateway.</p>
+        <ul>
+            <li><strong>Port 23 (Telnet):</strong> This is a <span class="risk">significant security risk</span>. Telnet sends all data, including login credentials, in plain, unencrypted text, making it vulnerable to eavesdropping and credential theft. This protocol has been largely replaced by the more secure SSH (Secure Shell) protocol. The best practice is to disable the Telnet service and use SSH for remote access if needed.</li>
+            <li><strong>Port 53 (Domain):</strong> This port is used for the Domain Name System (DNS) protocol. It is common for a router to act as a local DNS server for network devices. While necessary for network function, an improperly configured DNS server could be exploited for DDoS attacks.</li>
+            <li><strong>Port 80 (HTTP):</strong> This port is for Hypertext Transfer Protocol (HTTP), typically used for unencrypted web communication. The router's web-based administration panel likely runs on this port. Using HTTP instead of HTTPS exposes sensitive data (e.g., login credentials for the router) to potential interception.</li>
+            <li><strong>Port 5555 (Freeciv):</strong> My research indicates this port is used by the Freeciv game server. This suggests a device on the network is hosting a game. A potential risk is that the game's service could have vulnerabilities that an attacker could exploit to gain unauthorized access to the host device.</li>
+            <li><strong>Port 49152 (unknown):</strong> This port falls within the dynamic/private range. These ports are often used for temporary connections and are not officially assigned to a specific service. This could be an RPC (Remote Procedure Call) port used by a Windows system. While the risk is generally lower, the open port could still be a target for attackers if the underlying service is vulnerable.</li>
+        </ul>
+
+        <h4>IP Address: 192.168.1.3</h4>
+        <p>Based on the "iphone-sync" service, this device is likely an Apple iOS device (e.g., iPhone or iPad).</p>
+        <ul>
+            <li><strong>Port 62078 (iphone-sync):</strong> This port is used by Apple's `usbmuxd` service, which facilitates communication between an iOS device and a host computer (e.g., for iTunes syncing). The service allows for communication and data exchange, and although it is a standard service, it could be a potential point of entry if a vulnerability were to be discovered in the protocol.</li>
+            <li><strong>Port 49152 (unknown):</strong> Another dynamic port, likely used by a service on the device for a specific task.</li>
+        </ul>
+        
+        <h4>IP Addresses: 192.168.1.5, 192.168.1.7, 192.168.1.13</h4>
+        <p>The scan showed that these devices have all 1000 scanned ports either closed or filtered. This is a <span class="normal">good security posture</span>, as it minimizes the attack surface by not exposing unnecessary services to the network.</p>
+    </div>
+
+    <div class="section">
+        <h3>Conclusion and Recommendations</h3>
+        <p>The network scan was successful in identifying devices and their open ports. The primary security risk identified is the presence of Telnet (port 23) on the router. This unencrypted service poses a significant threat to the network's security.</p>
+        <p>My recommendations for securing the network include:</p>
+        <ul>
+            <li>Disabling the Telnet service on the router immediately and using a more secure alternative like SSH for any remote management needs.</li>
+            <li>Reviewing the router's settings to ensure the administration interface uses HTTPS (Port 443) instead of HTTP (Port 80) to encrypt login credentials.</li>
+            <li>Keeping all network devices and their software updated to patch any known vulnerabilities in services like the Freeciv game or the iOS sync service.</li>
+            <li>Implementing a firewall to block all unnecessary inbound ports and restrict access to services to only trusted devices.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
