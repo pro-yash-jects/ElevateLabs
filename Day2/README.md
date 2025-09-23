@@ -1,8 +1,8 @@
-\# Elevate Labs - Cybersecurity Internship: Task 2
+# Elevate Labs - Cybersecurity Internship: Task 2
 
 
 
-\## Phishing Email Analysis
+## Phishing Email Analysis
 
 
 
@@ -10,17 +10,17 @@ This repository contains the deliverables for Task 2 of the Elevate Labs Cyber S
 
 
 
-\### Files Included
+### Files Included
 
 
 
-\* `phishing\_report.html`: This HTML file contains the full report of the phishing email analysis, including a simulated email sample and a breakdown of the phishing indicators found.
+* `phishing_report.html`: This HTML file contains the full report of the phishing email analysis, including a simulated email sample and a breakdown of the phishing indicators found.
 
-\* `README.md`: This file, which provides an overview of the task and the contents of the repository.
+* `README.md`: This file, which provides an overview of the task and the contents of the repository.
 
 
 
-\### Analysis Process
+### Analysis Process
 
 
 
@@ -28,21 +28,21 @@ My approach to analyzing the suspicious email sample included the following step
 
 
 
-\* \*\*Obtained a Sample:\*\* A sample phishing email was obtained.
+* **Obtained a Sample:** A sample phishing email was obtained.
 
-\* \*\*Analyzed Sender and Headers:\*\* The sender's email address was examined for spoofing, and the email headers were checked for discrepancies using an online header analyzer.
+* **Analyzed Sender and Headers:** The sender's email address was examined for spoofing, and the email headers were checked for discrepancies using an online header analyzer.
 
-\* \*\*Identified Suspicious Links:\*\* Suspicious links or attachments were identified by hovering over them to reveal the actual, often mismatched, URLs.
+* **Identified Suspicious Links:** Suspicious links or attachments were identified by hovering over them to reveal the actual, often mismatched, URLs.
 
-\* \*\*Assessed Language and Tone:\*\* I identified urgent or threatening language in the email body, which is a common phishing tactic.
+* **Assessed Language and Tone:** I identified urgent or threatening language in the email body, which is a common phishing tactic.
 
-\* \*\*Checked for Errors:\*\* The email was verified for the presence of spelling or grammar errors, another common indicator of a phishing attempt.
+* **Checked for Errors:** The email was verified for the presence of spelling or grammar errors, another common indicator of a phishing attempt.
 
-\* \*\*Summarized Findings:\*\* All identified phishing traits were summarized in the final report.
+* **Summarized Findings:** All identified phishing traits were summarized in the final report.
 
 
 
-\### Outcome
+### Outcome
 
 
 
